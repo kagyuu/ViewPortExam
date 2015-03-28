@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript">
+window.onload = function() {
+}
+function go() {
+    document.location.href = 'frame3.html';
+}
+</script>
+</head>
+<body>
+SET PARAMETER <br/>
+<form action="frame3.html">
+<table border="0">
+<tr><td>x</td><td><input type="text"/></td></tr>
+<tr><td>y</td><td><input type="text"/></td></tr>
+<tr><td>z</td><td><input type="text"/></td></tr>
+<tr><td>v</td><td><input type="text"/></td></tr>
+<tr><td>e</td>
+	<td>
+		<select>
+			<option>Solid</option>
+			<option>Liquid</option>
+			<option>Gas</option>
+		</select>
+	</td>
+</tr>
+<tr><td colspan="2"><button onclick="go()">Simulate</button></td></tr>
+</table>
+</form>
+</body>
+</html>

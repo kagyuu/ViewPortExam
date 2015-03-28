@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=1" />
+    <title>viewport size example</title>
+    <style>
+    </style>
+    <script type="text/javascript">
+/* ==================== SCRIPTS ==================== */
+window.onload = function() {
+  draw();
+}
+   
+function draw() {
+  var canvas = document.getElementById('canvassample');
+  if ( ! canvas || ! canvas.getContext ) {
+    return false;
+  }
+    
+  var ctx = canvas.getContext('2d');
+  
+  for (x = 0; x <= canvas.width; x+=20) {
+    for (y = 0; y <= canvas.height; y+=20) {
+        
+      if (x % 100 === 0 || y % 100 === 0) {
+        ctx.save();
+        ctx.fillStyle = 'red';
+        ctx.fillRect(x,y,5,5);
+        ctx.restore();
+      } else {
+        ctx.save();
+        ctx.fillStyle = 'lightgreen';
+        ctx.fillRect(x,y,5,5);
+        ctx.restore();
+      }
+    }
+  }
+  
+  ctx.strokeRect(0, 0, 100, 100);
+  ctx.strokeRect(0, 0, canvas.width, canvas.height);
+  
+  ctx.font = '10pt monospace';
+  ctx.fillText('100px', 30, 115);
+
+  ctx.translate(110, 0);
+  ctx.rotate(0.5 * Math.PI);
+  ctx.fillText('100px', 30, 0);
+    
+  ctx.restore();
+}
+ 
+function rewind() {
+	// 1.0 倍にする
+    var viewport = document.querySelector("meta[name=viewport]");
+    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0');
+    
+    // 100ms 後に、元通り最大 5.0 倍。拡大可能にする
+    setTimeout(function(){
+        var viewport = document.querySelector("meta[name=viewport]");
+        viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=1');
+    },100);    
+}
+function expand() {
+    var viewport = document.querySelector("meta[name=viewport]");
+    viewport.setAttribute('content', 'width=device-width, initial-scale=2.0, maximum-scale=5.0, user-scalable=1');
+}
+/* ==================== SCRIPTS ==================== */
+</script>
+  </head>
+  <body>
+  	Rewrite viewport with using setTimeout<br/>
+    <button onclick="rewind()">rewind</button>
+    <button onclick="expand()">expand</button><br/><br/>
+    <canvas id="canvassample" width="300" height="400"></canvas>
+  </body>
+</html>

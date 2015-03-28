@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>viewport size example</title>
+    <style>
+    </style>
+    <script type="text/javascript">
+/* ==================== SCRIPTS ==================== */
+window.onload = function() {
+  draw();
+  // 親FRAME画面の初期スケール 1.0 (拡大縮小不可)
+  var viewport = window.parent.document.querySelector("meta[name=viewport]");
+  viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1');
+}
+   
+function draw() {
+  var canvas = document.getElementById('canvassample');
+  if ( ! canvas || ! canvas.getContext ) {
+    return false;
+  }
+    
+  var ctx = canvas.getContext('2d');
+  
+  for (x = 0; x <= canvas.width; x+=20) {
+    for (y = 0; y <= canvas.height; y+=20) {
+        
+      if (x % 100 === 0 || y % 100 === 0) {
+        ctx.save();
+        ctx.fillStyle = 'red';
+        ctx.fillRect(x,y,5,5);
+        ctx.restore();
+      } else {
+        ctx.save();
+        ctx.fillStyle = 'lightgreen';
+        ctx.fillRect(x,y,5,5);
+        ctx.restore();
+      }
+    }
+  }
+  
+  ctx.strokeRect(0, 0, 100, 100);
+  ctx.strokeRect(0, 0, canvas.width, canvas.height);
+  
+  ctx.font = '10pt monospace';
+  ctx.fillText('100px', 30, 115);
+
+  ctx.translate(110, 0);
+  ctx.rotate(0.5 * Math.PI);
+  ctx.fillText('100px', 30, 0);
+    
+  ctx.restore();
+}
+ 
+function back() {
+    document.location.href = 'frame2.html';
+}
+/* ==================== SCRIPTS ==================== */
+</script>
+  </head>
+  <body>
+    <button onclick="back()">back</button><br/>
+    <canvas id="canvassample" width="300" height="400"></canvas>
+  </body>
+</html>
