@@ -56,10 +56,8 @@ function rewind() {
     
     // 100ms 後に、元通り最大 5.0 倍。拡大可能にする
     setTimeout(function(){
-		var newViewport=document.createElement('meta');
-		newViewport.setAttribute('name','viewport');
-		newViewport.setAttribute('content','width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=1');
-		head.appendChild(newViewport);
+        var viewport = document.querySelector("meta[name=viewport]");
+        viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=1');
      },1000);    
 }
 function expand() {
